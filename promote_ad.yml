@@ -1,0 +1,29 @@
+---
+- name: Promote to Active Directory
+  hosts: Windows_Servers
+  collections:
+   # - ansible.windows
+   # - microsoft.ad
+
+  vars:
+   dns_domain:
+   safemode_pass:
+
+  tasks:
+    ## Add tasks or uncomment the below
+    
+    # - name: Install the AD Role
+    #   ansible.windows.win_feature:
+    #    name: AD-Domain-Services
+    #    include_management_tools: true
+    #    include_sub_features: true
+
+    # - name: Setup Active Directory Controller
+    #   microsoft.ad.domain:
+    #    dns_domain_name: "{{ dns_domain }}"
+    #    safe_mode_password: "{{ safemode_pass }}"
+    #   register: active_directory
+
+    # - name: Reboot after the Domain controler has been created
+    #   ansible.windows.win_reboot:
+    #   when: active_directory.reboot_required

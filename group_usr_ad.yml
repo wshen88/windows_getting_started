@@ -1,0 +1,27 @@
+---
+- hosts: Windows_Servers
+  gather_facts: false
+  collections:
+   - microsoft.ad
+
+  vars_files:
+    - passwd.yml
+
+  tasks:
+
+    - name: Create a Domain Group
+      microsoft.ad.group:
+       name: AnsibleGrp
+       scope: global
+       state: present
+
+    - name: Create Ansible Domain User
+      microsoft.ad.user:
+       name: DevOps
+       password: "{{ ansible_password }}"
+       state: present
+       groups:
+        set:
+         - Domain Admins
+         - Domain Users
+         - AnsibleGrp

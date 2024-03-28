@@ -1,0 +1,26 @@
+---
+- name: Create local machine users
+  hosts: Sindows_Servers
+  gather_facts: no
+
+  vars_files:
+    - passwd.yml
+  
+  tasks:
+    - name: Create DevOps group
+      ansible.windows.win_group:
+        name: DevOps
+        state: present
+
+    - name: Create DevOps users
+      ansible.windows.win_user:
+        name: "{{ item }}"
+        password: "{{ ansible_password }}"
+        groups: DevOps
+        state: present
+      loop:
+        - Sean
+        - Colin
+        - Anshul
+        - Hicham
+        - Leo
